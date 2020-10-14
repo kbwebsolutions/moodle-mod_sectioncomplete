@@ -1,0 +1,10 @@
+.mod_sectioncomplete-contentwrapper .completebtn {
+    width: 20%;
+    height: auto;
+    margin: 4em auto;
+    display: block;
+}
+
+.mod_sectioncomplete-contentwrapper .charteredcollege-asset-completion-tracking {
+    display:none;
+}

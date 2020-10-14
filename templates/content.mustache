@@ -1,0 +1,50 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+{{!/**
+ *
+ * @package mod_sectioncomplete
+ * @copyright Copyright (c) 2020 Chartered College of Teaching. (http://www.charterd.college)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+}}
+{{!
+@template mod_structlabel/content
+
+    The content.
+
+    Example context (json):
+    {
+        "title": "Awesome Structured Title",
+        "content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae perspiciatis sint quas enim! Ratione velit, dolores doloremque! Ipsa animi accusantium error laudantium incidunt veniam totam itaque vitae. Blanditiis, libero voluptatem.</p>",
+        "imageurl": "https://placekitten.com/200/300"
+    }
+}}
+<div class="mod_sectioncomplete-wrapper">
+   <h3 class="mod_sectioncomplete-title"></h3>
+    <div class="mod_sectioncomplete-contentwrapper">
+        <div class="mod_sectioncomplete-content">
+            <div class="mod_sectioncomplete-paragraph bob">
+                {{{content}}}
+                <form action="complete.php" method="post">
+                    <input type="image" name="completebtn" class="completebtn" src="{{{buttonimage}}}" value="Submit" />
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
