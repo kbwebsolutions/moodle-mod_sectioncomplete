@@ -127,39 +127,40 @@ function sectioncomplete_get_coursemodule_info($cm) {
 
     return $result;
 }
-    /**
-     * Obtains the automatic completion state for this choice based on any conditions
-     * in forum settings.
-     *
-     * @param object $course Course
-     * @param object $cm Course-module
-     * @param int $userid User ID
-     * @param bool $type Type of comparison (or/and; can be used as return value if no conditions)
-     * @return bool True if completed, false if not, $type if conditions not set.
-     */
-    function sectioncomplete_get_completion_state($course, $cm, $userid, $type) {
-        global $DB;
 
-        // Get choice details
-        $complete = $DB->get_record('sectioncomplete', array('id'=>$cm->instance), '*',
-                MUST_EXIST);
+/**
+ * Obtains the automatic completion state for this choice based on any conditions
+ * in forum settings.
+ *
+ * @param object $course Course
+ * @param object $cm Course-module
+ * @param int $userid User ID
+ * @param bool $type Type of comparison (or/and; can be used as return value if no conditions)
+ * @return bool True if completed, false if not, $type if conditions not set.
+ */
+function sectioncomplete_get_completion_state($course, $cm, $userid) {
+    global $DB;
 
-        // If completion option is enabled, evaluate it and return true/false
-        if($complete->completebtnticked) {
-            return $DB->record_exists('sectioncomplete_users', array(
-                    'sectionid'=>$complete->id, 'userid'=>$userid));
-        } else {
-            // Completion option is not enabled so just return $type
-            return $type;
-        }
+    // Get choice details
+    $complete = $DB->get_record('sectioncomplete', array('id'=>$cm->instance), '*',
+            MUST_EXIST);
+
+    // If completion option is enabled, evaluate it and return true/false
+    if($complete->completebtnticked) {
+        return $DB->record_exists('sectioncomplete_users', array(
+                'sectionid'=>$complete->id, 'userid'=>$userid));
+    } else {
+        // Completion option is not enabled so just return $type
+        return $type;
     }
+}
 
-    function mod_sectioncomplete_cm_info_view(cm_info $cm) {
-        global $PAGE;
+function mod_sectioncomplete_cm_info_view(cm_info $cm) {
+    global $PAGE;
 
-        if (!$cm->uservisible) {
-            return;
-        }
-        $renderer = $PAGE->get_renderer('mod_sectioncomplete');
-        $cm->set_content($renderer->display_content($cm), true);
+    if (!$cm->uservisible) {
+        return;
     }
+    $renderer = $PAGE->get_renderer('mod_sectioncomplete');
+    $cm->set_content($renderer->display_content($cm), true);
+}
