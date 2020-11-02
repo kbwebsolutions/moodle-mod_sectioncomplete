@@ -21,7 +21,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_sectioncomplete\output;
 require_once($CFG->dirroot . '/mod/sectioncomplete/lib.php');
 
 defined('MOODLE_INTERNAL') || die();
@@ -32,7 +31,7 @@ class renderer extends \plugin_renderer_base {
         global $CFG, $DB;
 
         $title = $cm->name;
-        if(sectioncomplete_get_completion_state) {
+        if(sectioncomplete_get_completion_state($cm, $USER->id)) {
             $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/tocomplete.svg";
         } else {
             $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/completed.svg";
