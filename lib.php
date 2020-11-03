@@ -161,6 +161,6 @@ function mod_sectioncomplete_cm_info_view(cm_info $cm) {
     if (!$cm->uservisible) {
         return;
     }
-    $renderer = $PAGE->get_renderer('mod_sectioncomplete');
+    $renderer = $PAGE->get_renderer('sectioncomplete');
     $cm->set_content($renderer->display_content($cm), true);
 }

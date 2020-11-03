@@ -25,13 +25,15 @@ require_once($CFG->dirroot . '/mod/sectioncomplete/lib.php');
 
 defined('MOODLE_INTERNAL') || die();
 
-class renderer extends \plugin_renderer_base {
+class mod_sectioncomplete_renderer extends \plugin_renderer_base {
 
     public function display_content(\cm_info $cm) {
-        global $CFG, $DB;
+        global $CFG, $DB, $USER;
 
         $title = $cm->name;
-        if(sectioncomplete_get_completion_state($cm, $USER->id)) {
+
+        //TODO Kieran, need to actually get the course, probably from $cm
+        if(sectioncomplete_get_completion_state(2,$cm, $USER->id)) {
             $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/tocomplete.svg";
         } else {
             $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/completed.svg";
