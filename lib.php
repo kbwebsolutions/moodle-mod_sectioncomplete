@@ -75,12 +75,11 @@ function sectioncomplete_add_instance($completedsection) {
 function sectioncomplete_update_instance($completedsection) {
     global $DB;
 
-    $completedsection->name = get_label_name($completedsection);
     $completedsection->timemodified = time();
     $completedsection->id = $completedsection->instance;
 
     $completiontimeexpected = !empty($completedsection->completionexpected) ? $completedsection->completionexpected : null;
-    \core_completion\api::update_completion_date_event($completedsection->coursemodule, 'label', $completedsection->id, $completiontimeexpected);
+    \core_completion\api::update_completion_date_event($completedsection->coursemodule, 'sectioncomplete', $completedsection->id, $completiontimeexpected);
 
     return $DB->update_record("sectioncomplete", $completedsection);
 }
@@ -98,6 +97,7 @@ function sectioncomplete_delete_instance($id) {
     global $DB;
 
     $DB->delete_records('sectioncomplete', ['id' => $id]);
+    $DB->delete_records('sectioncomplete_users', ['sectionid' => $id]);
 
 }
 
@@ -142,17 +142,16 @@ function sectioncomplete_get_completion_state($course, $cm, $userid) {
     global $DB;
 
     // Get choice details
-    $complete = $DB->get_record('sectioncomplete', array('id'=>$cm->instance), '*',
+    $completionEnabled = $DB->get_field('sectioncomplete','completebtnticked', array('id'=>$cm->instance),
             MUST_EXIST);
 
     // If completion option is enabled, evaluate it and return true/false
-    if($complete->completebtnticked) {
-        return $DB->record_exists('sectioncomplete_users', array(
+    if($completionEnabled) {
+        $comp  =  $DB->record_exists('sectioncomplete_users', array(
                 'sectionid'=>$complete->id, 'userid'=>$userid));
-    } else {
-        // Completion option is not enabled so just return $type
-        return $type;
     }
+
+    return $comp;
 }
 
 function mod_sectioncomplete_cm_info_view(cm_info $cm) {
