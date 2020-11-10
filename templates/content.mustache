@@ -1,5 +1,4 @@
-<?php
-// This file is part of Moodle - http://moodle.org/
+{{!// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -13,6 +12,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
 
 {{!/**
  *
@@ -39,12 +39,29 @@
         <div class="mod_sectioncomplete-content">
             <div class="mod_sectioncomplete-paragraph bob">
                 {{{content}}}
-                <form action="complete.php" method="post">
-                    <input type="image" name="completebtn" class="completebtn" src="{{{buttonimage}}}" value="Submit" />
+                <form action={{{formaction}}} method="post" class="">
+                    <div>
+                        <input type="hidden" name="id" value={{{module}}}>
+                        <input type="hidden" name="sesskey" value={{{sessionkey}}}>
+                        <input type="hidden" name="modulename" value={{{title}}}>
+                        <input type="hidden" name="completionstate" value={{{completionstate}}}>
+                        <img id="completebtn" class="tocomplete" src="{{{buttonimage}}}" value="Submit" />
+                    </div>
                 </form>
 
             </div>
         </div>
-
     </div>
 </div>
+{{#js}}
+    require(['jquery'], function($) {
+    $('#completebtn').click(function() {
+        if ($(this).hasClass("tocomplete")) {
+            $(this).attr('src', '{{{completedurl}}}').attr('class', 'completed');
+        } else {
+            $(this).attr('src', '{{{tocompleteurl}}}').attr('class', 'tocomplete');
+        }
+    });
+    });
+{{/js}}
+

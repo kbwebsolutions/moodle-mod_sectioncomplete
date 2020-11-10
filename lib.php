@@ -32,7 +32,6 @@ defined('MOODLE_INTERNAL') || die();
  */
 function mod_sectioncomplete_supports($feature) {
     switch ($feature) {
-        case FEATURE_COMPLETION_HAS_RULES:
         case FEATURE_NO_VIEW_LINK:
         case FEATURE_MOD_INTRO:
         case FEATURE_IDNUMBER:
@@ -128,33 +127,7 @@ function sectioncomplete_get_coursemodule_info($cm) {
     return $result;
 }
 
-/**
- * Obtains the automatic completion state for this choice based on any conditions
- * in forum settings.
- *
- * @param object $course Course
- * @param object $cm Course-module
- * @param int $userid User ID
- * @param bool $type Type of comparison (or/and; can be used as return value if no conditions)
- * @return bool True if completed, false if not, $type if conditions not set.
- */
-function sectioncomplete_get_completion_state($course, $cm, $userid) {
-    global $DB;
-
-    // Get choice details
-    $completionEnabled = $DB->get_field('sectioncomplete','completebtnticked', array('id'=>$cm->instance),
-            MUST_EXIST);
-
-    // If completion option is enabled, evaluate it and return true/false
-    if($completionEnabled) {
-        $comp  =  $DB->record_exists('sectioncomplete_users', array(
-                'sectionid'=>$complete->id, 'userid'=>$userid));
-    }
-
-    return $comp;
-}
-
-function mod_sectioncomplete_cm_info_view(cm_info $cm) {
+function sectioncomplete_cm_info_view(cm_info $cm) {
     global $PAGE;
 
     if (!$cm->uservisible) {
@@ -162,4 +135,15 @@ function mod_sectioncomplete_cm_info_view(cm_info $cm) {
     }
     $renderer = $PAGE->get_renderer('sectioncomplete');
     $cm->set_content($renderer->display_content($cm), true);
+}
+
+function sectioncomplete_completionstate($course) {
+
+    $completion = new completion_info($course);
+
+    if ($completion = 'yes') {
+        return false;
+    } else {
+        return true;
+    }
 }

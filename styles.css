@@ -1,8 +1,9 @@
-.mod_sectioncomplete-contentwrapper .completebtn {
+.mod_sectioncomplete-contentwrapper #completebtn {
     width: 20%;
     height: auto;
     margin: 4em auto;
     display: block;
+    cursor: pointer;
 }
 
 .mod_sectioncomplete-contentwrapper .charteredcollege-asset-completion-tracking {

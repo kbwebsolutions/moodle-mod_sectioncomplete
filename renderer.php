@@ -32,16 +32,22 @@ class mod_sectioncomplete_renderer extends \plugin_renderer_base {
 
         $title = $cm->name;
         //TODO Kieran, need to actually get the course, probably from $cm
-        if(sectioncomplete_get_completion_state($course,$cm, $USER->id)) {
+        if(sectioncomplete_completionstate($cm->id)) {
             $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/completed.svg";
         } else {
             $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/tocomplete.svg";
         }
 
         $data = [
+                'formaction' => new moodle_url('/course/togglecompletion.php'),
                 'title' => $title,
+                'module' => $cm->id,
+                'sessionkey' => sesskey(),
                 'content' => format_module_intro('sectioncomplete', $cm->customdata, $cm->id),
-                'buttonimage' => $button
+                'buttonimage' => $button,
+                'completionstate' => 1,
+                'tocompleteurl' => $CFG->wwwroot ."/mod/sectioncomplete/pix/tocomplete.svg",
+                'completedurl' => $CFG->wwwroot ."/mod/sectioncomplete/pix/completed.svg"
         ];
 
         return $this->render_from_template('mod_sectioncomplete/content', $data);
