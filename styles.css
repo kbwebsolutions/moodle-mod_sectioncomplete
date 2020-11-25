@@ -1,3 +1,6 @@
+.section li.modtype_sectioncomplete .charteredcollege-header-card-icons {
+    display:none;
+}
 .mod_sectioncomplete-contentwrapper #completebtn {
     width: 20%;
     height: auto;
@@ -8,4 +11,19 @@
 
 .mod_sectioncomplete-contentwrapper .charteredcollege-asset-completion-tracking {
     display:none;
+}
+
+.mod_sectioncomplete-contentwrapper form.togglecompletion {
+    position: relative;
+    width: 120px;
+    height: 100%;
+    margin: auto;
+}
+
+.mod_sectioncomplete-contentwrapper #completebtn {
+    width: 100%;
+    height: auto;
+    margin: 4em auto;
+    display: block;
+    cursor: pointer;
 }

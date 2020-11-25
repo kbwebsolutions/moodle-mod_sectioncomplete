@@ -27,15 +27,17 @@ defined('MOODLE_INTERNAL') || die();
 
 class mod_sectioncomplete_renderer extends \plugin_renderer_base {
 
+
     public function display_content(\cm_info $cm) {
-        global $CFG, $DB, $USER;
+        global $CFG, $course, $USER;
 
         $title = $cm->name;
-        //TODO Kieran, need to actually get the course, probably from $cm
-        if(sectioncomplete_completionstate($cm->id)) {
-            $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/completed.svg";
+        if (sectioncomplete_completionstate($course)) {
+            $button = $CFG->wwwroot . "/mod/sectioncomplete/pix/completed.svg";
+            $completionstate = 0;
         } else {
-            $button = $CFG->wwwroot ."/mod/sectioncomplete/pix/tocomplete.svg";
+            $button = $CFG->wwwroot . "/mod/sectioncomplete/pix/tocomplete.svg";
+            $completionstate = 1;
         }
 
         $data = [
@@ -45,9 +47,9 @@ class mod_sectioncomplete_renderer extends \plugin_renderer_base {
                 'sessionkey' => sesskey(),
                 'content' => format_module_intro('sectioncomplete', $cm->customdata, $cm->id),
                 'buttonimage' => $button,
-                'completionstate' => 1,
-                'tocompleteurl' => $CFG->wwwroot ."/mod/sectioncomplete/pix/tocomplete.svg",
-                'completedurl' => $CFG->wwwroot ."/mod/sectioncomplete/pix/completed.svg"
+                'completionstate' => $completionstate,
+                'tocompleteurl' => $CFG->wwwroot . "/mod/sectioncomplete/pix/tocomplete.svg",
+                'completedurl' => $CFG->wwwroot . "/mod/sectioncomplete/pix/completed.svg"
         ];
 
         return $this->render_from_template('mod_sectioncomplete/content', $data);

@@ -140,8 +140,8 @@ function sectioncomplete_cm_info_view(cm_info $cm) {
 function sectioncomplete_completionstate($course) {
 
     $completion = new completion_info($course);
-
-    if ($completion = 'yes') {
+    $completiondata = $completion->get_data($cm, false, $userid);
+    if ($completiondata->completionstate == 0) {
         return false;
     } else {
         return true;
