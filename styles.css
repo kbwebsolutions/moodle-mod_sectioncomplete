@@ -16,14 +16,39 @@
 .mod_sectioncomplete-contentwrapper form.togglecompletion {
     position: relative;
     width: 120px;
-    height: 100%;
-    margin: auto;
+    height: 150px;
+    float: right;
 }
 
 .mod_sectioncomplete-contentwrapper #completebtn {
     width: 100%;
     height: auto;
-    margin: 4em auto;
     display: block;
     cursor: pointer;
+    margin:0.25em;
+}
+
+.mod_sectioncomplete-contentwrapper form.togglecompletion.ajaxing:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    max-width: 120px;
+    max-height: 120px;
+    top: 0;
+    left: 0;
+    border: solid;
+    border-width: 23px;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top-color: #323232;
+    border-right-color: rgba(50, 50, 50, .25);
+    border-bottom-color: rgba(50, 50, 50, .25);
+    border-left-color: rgba(50, 50, 50, .25);
+    animation-name: circleajax;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }

@@ -45,7 +45,7 @@
                         <input type="hidden" name="sesskey" value={{{sessionkey}}}>
                         <input type="hidden" name="modulename" value={{{title}}}>
                         <input type="hidden" class="completionstate" name="completionstate" value={{{completionstate}}}>
-                        <button class="btn btn-link" aria-live="assertive">
+                        <button id="competeionbtn" class="btn btn-link" aria-live="assertive">
                         <img id="completebtn" class="tocomplete" src="{{{buttonimage}}}" value="Submit" /></button>
                     </div>
                 </form>
@@ -56,12 +56,12 @@
 </div>
 {{#js}}
     require(['jquery'], function($) {
-    $('#completebtn').click(function() {
-        if ($(this).hasClass("tocomplete")) {
-            $(this).attr('src', '{{{completedurl}}}').attr('class', 'completed');
+    $('#completionbtn').click(function() {
+        if (('#completebtn').hasClass("tocomplete")) {
+            ('#completebtn').attr('src', '{{{completedurl}}}').attr('class', 'completed');
 
         } else {
-            $(this).attr('src', '{{{tocompleteurl}}}').attr('class', 'tocomplete');
+            ('#completebtn').attr('src', '{{{tocompleteurl}}}').attr('class', 'tocomplete');
 
         }
     });
