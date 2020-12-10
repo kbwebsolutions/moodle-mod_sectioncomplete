@@ -1,7 +1,7 @@
 .section li.modtype_sectioncomplete .charteredcollege-header-card-icons {
     display:none;
 }
-.mod_sectioncomplete-contentwrapper #completebtn {
+.mod_sectioncomplete-contentwrapper .completebtn {
     width: 20%;
     height: auto;
     margin: 4em auto;
@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 
-.mod_sectioncomplete-contentwrapper .charteredcollege-asset-completion-tracking {
+.modtype_sectioncomplete .charteredcollege-asset-completion-tracking {
     display:none;
 }
 
@@ -20,7 +20,7 @@
     float: right;
 }
 
-.mod_sectioncomplete-contentwrapper #completebtn {
+.mod_sectioncomplete-contentwrapper .completebtn {
     width: 100%;
     height: auto;
     display: block;

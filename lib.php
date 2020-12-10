@@ -137,9 +137,10 @@ function sectioncomplete_cm_info_view(cm_info $cm) {
     $cm->set_content($renderer->display_content($cm), true);
 }
 
-function sectioncomplete_completionstate($course) {
+function sectioncomplete_completionstate($cm) {
+    global $COURSE;
 
-    $completion = new completion_info($course);
+    $completion = new completion_info($COURSE);
     $completiondata = $completion->get_data($cm, false, $userid);
     if ($completiondata->completionstate == 0) {
         return false;

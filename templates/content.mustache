@@ -39,14 +39,14 @@
         <div class="mod_sectioncomplete-content">
             <div class="mod_sectioncomplete-paragraph bob">
                 {{{content}}}
-                <form action={{{formaction}}} method="post" class="togglecompletion" id="compbtn">
+                <form action={{{formaction}}} method="post" class="togglecompletion" id="compbtn-{{{module}}}">
                     <div>
                         <input type="hidden" name="id" value={{{module}}}>
-                        <input type="hidden" name="sesskey" value={{{sessionkey}}}>
+                        <input type="hidden" class="compbtn-{{{module}}}" name="sesskey" value={{{sessionkey}}}>
                         <input type="hidden" name="modulename" value={{{title}}}>
                         <input type="hidden" class="completionstate" name="completionstate" value={{{completionstate}}}>
-                        <button id="competeionbtn" class="btn btn-link" aria-live="assertive">
-                        <img id="completebtn" class="tocomplete" src="{{{buttonimage}}}" value="Submit" /></button>
+                        <button class="btn btn-link" aria-live="assertive">
+                        <img id="completebtn-{{{module}}}" class="completebtn tocomplete" src="{{{buttonimage}}}" value="Submit" /></button>
                     </div>
                 </form>
 
@@ -56,12 +56,14 @@
 </div>
 {{#js}}
     require(['jquery'], function($) {
-    $('#completionbtn').click(function() {
-        if (('#completebtn').hasClass("tocomplete")) {
-            ('#completebtn').attr('src', '{{{completedurl}}}').attr('class', 'completed');
+    $('#completebtn-{{{module}}}').focus(function() {
+        if (($(this).hasClass("tocomplete")) {
+            $(this).attr('src', '{{{completedurl}}}').attr('class', 'completed');
+
 
         } else {
-            ('#completebtn').attr('src', '{{{tocompleteurl}}}').attr('class', 'tocomplete');
+            $(this).attr('src', '{{{tocompleteurl}}}').attr('class', 'tocomplete');
+
 
         }
     });

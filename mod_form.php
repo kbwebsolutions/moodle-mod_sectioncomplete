@@ -38,7 +38,6 @@ class mod_sectioncomplete_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
-
         $this->standard_intro_elements(get_string('message', 'sectioncomplete'));
         $mform->addRule('introeditor', null, 'required', null, 'client');
 
@@ -52,18 +51,5 @@ class mod_sectioncomplete_mod_form extends moodleform_mod {
         // buttons
         $this->add_action_buttons(true, false, null);
 
-    }
-
-    public function add_completion_rules() {
-        $mform =& $this->_form;
-
-        $mform->addElement('checkbox', 'completebtnticked', '', get_string('completebtnticked','sectioncomplete'));
-        $mform->setDefault('completebtnticked', 1);
-
-        return array('completebtnticked');
-    }
-
-    function completion_rule_enabled($data) {
-        return !empty($data['completebtnticked']);
     }
 }

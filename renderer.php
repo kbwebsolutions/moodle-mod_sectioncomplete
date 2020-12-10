@@ -32,7 +32,7 @@ class mod_sectioncomplete_renderer extends \plugin_renderer_base {
         global $CFG, $course, $USER;
 
         $title = $cm->name;
-        if (sectioncomplete_completionstate($course)) {
+        if (sectioncomplete_completionstate($cm)) {
             $button = $CFG->wwwroot . "/mod/sectioncomplete/pix/completed.svg";
             $completionstate = 0;
         } else {
