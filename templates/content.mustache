@@ -39,12 +39,12 @@
         <div class="mod_sectioncomplete-content">
             <div class="mod_sectioncomplete-paragraph bob">
                 {{{content}}}
-                <form action={{{formaction}}} method="post" class="togglecompletion" id="compbtn-{{{module}}}">
+                <form action={{{formaction}}} method="post" class="togglecompletion" id="completedsection-{{{module}}}">
                     <div>
                         <input type="hidden" name="id" value={{{module}}}>
                         <input type="hidden" class="compbtn-{{{module}}}" name="sesskey" value={{{sessionkey}}}>
                         <input type="hidden" name="modulename" value={{{title}}}>
-                        <input type="hidden" class="completionstate" name="completionstate" value={{{completionstate}}}>
+                        <input type="hidden" class="completionstate compstate-{{{module}}}" name="completionstate" value={{{completionstate}}}>
                         <button class="btn btn-link" aria-live="assertive">
                         <img id="completebtn-{{{module}}}" class="completebtn tocomplete" src="{{{buttonimage}}}" value="Submit" /></button>
                     </div>
@@ -56,17 +56,14 @@
 </div>
 {{#js}}
     require(['jquery'], function($) {
-    $('#completebtn-{{{module}}}').focus(function() {
-        if (($(this).hasClass("tocomplete")) {
-            $(this).attr('src', '{{{completedurl}}}').attr('class', 'completed');
-
-
-        } else {
-            $(this).attr('src', '{{{tocompleteurl}}}').attr('class', 'tocomplete');
-
-
-        }
-    });
+        $('#completebtn-{{{module}}}').click(function() {
+            if ($(this).hasClass("tocomplete")) {
+                $(this).attr('src', '{{{completedurl}}}').attr('class', 'completebtn completed');
+                $('.compstate-{{{module}}}').attr('value', '1');
+            } else {
+                 $(this).attr('src', '{{{tocompleteurl}}}').attr('class', 'completebtn tocomplete');
+                 $('.compstate-{{{module}}}').attr('value', '0');
+             }
+        });
     });
 {{/js}}
-
